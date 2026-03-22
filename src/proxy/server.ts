@@ -20,6 +20,7 @@ import { buildAgentDefinitions } from "./agentDefs"
 import { createPassthroughMcpServer, stripMcpPrefix, PASSTHROUGH_MCP_NAME, PASSTHROUGH_MCP_PREFIX } from "./passthroughTools"
 import { lookupSharedSession, storeSharedSession, clearSharedSessions } from "./sessionStore"
 import { LRUMap } from "../utils/lruMap"
+import { apiKeyMiddleware } from "../middleware/apiKey"
 
 // --- Session Tracking ---
 // Maps OpenCode session ID (or fingerprint) → Claude SDK session ID
@@ -393,7 +394,7 @@ export function createProxyServer(config: Partial<ProxyConfig> = {}) {
   const app = new Hono()
 
   app.use("*", cors())
-
+  app.use("*", apiKeyMiddleware(finalConfig))
   app.get("/", (c) => {
     return c.json({
       status: "ok",

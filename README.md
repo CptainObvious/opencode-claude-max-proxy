@@ -223,7 +223,7 @@ Sessions expire after 24 hours.
 | `CLAUDE_PROXY_WORKDIR`              | (cwd)     | Working directory for Claude and tools                   |
 | `CLAUDE_PROXY_MAX_CONCURRENT`       | 1         | Max concurrent SDK sessions (increase with caution)      |
 | `CLAUDE_PROXY_IDLE_TIMEOUT_SECONDS` | 120       | Connection idle timeout                                  |
-
+| `API_KEY`                           | (unset)   | Only allow request with API_KEY set as x-api-key         |
 ## Concurrency
 
 Per-terminal proxies (`oc.sh`) avoid concurrency issues entirely. Each terminal gets its own proxy.
